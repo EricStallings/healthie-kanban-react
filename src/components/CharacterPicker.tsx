@@ -52,6 +52,14 @@ export function CharacterPicker({
       }
     },
     onSelectedItemChange: ({ selectedItem }) => onChange(selectedItem ?? null),
+    // When we clear the pick because the user edited the text, Downshift would normally
+    // reset the box to the empty item's text (""). Keep what they typed instead.
+    stateReducer: (state, { type, changes }) => {
+      if (type === useCombobox.stateChangeTypes.ControlledPropUpdatedSelectedItem) {
+        return { ...changes, inputValue: state.inputValue }
+      }
+      return changes
+    },
   })
 
   let statusMessage: string | null = null
@@ -84,29 +92,35 @@ export function CharacterPicker({
         </button>
       </div>
 
-      <ul className={`${styles.menu} ${isOpen ? styles.open : ''}`} {...getMenuProps()}>
-        {isOpen &&
-          results.map((character, index) => (
-            <li
-              key={character.id}
-              className={[
-                styles.option,
-                highlightedIndex === index ? styles.highlighted : '',
-                selectedCharacter?.id === character.id ? styles.selected : '',
-              ].join(' ')}
-              {...getItemProps({ item: character, index })}
-            >
-              <img
-                className={styles.optionAvatar}
-                src={character.image}
-                alt=""
-                loading="lazy"
-              />
-              {character.name}
-            </li>
-          ))}
-        {isOpen && statusMessage && <li className={styles.status}>{statusMessage}</li>}
-      </ul>
+      <div className={`${styles.menu} ${isOpen ? styles.open : ''}`}>
+        <ul className={styles.options} {...getMenuProps()}>
+          {isOpen &&
+            results.map((character, index) => (
+              <li
+                key={character.id}
+                className={[
+                  styles.option,
+                  highlightedIndex === index ? styles.highlighted : '',
+                  selectedCharacter?.id === character.id ? styles.selected : '',
+                ].join(' ')}
+                {...getItemProps({ item: character, index })}
+              >
+                <img
+                  className={styles.optionAvatar}
+                  src={character.image}
+                  alt=""
+                  loading="lazy"
+                />
+                {character.name}
+              </li>
+            ))}
+        </ul>
+        {/* Outside the list (a listbox may only contain options), and announced politely
+            to screen readers. */}
+        <div className={styles.status} role="status" aria-live="polite">
+          {isOpen ? statusMessage : null}
+        </div>
+      </div>
     </div>
   )
 }

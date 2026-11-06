@@ -61,6 +61,11 @@
   border-radius: var(--radius-medium);
   background: var(--color-panel-raised);
   box-shadow: 0 12px 28px #0009;
+}
+
+.options {
+  margin: 0;
+  padding: 0;
   list-style: none;
 }
 
@@ -91,6 +96,10 @@
   height: 28px;
   border-radius: 50%;
   background: var(--color-line);
+}
+
+.status:empty {
+  display: none;
 }
 
 .status {

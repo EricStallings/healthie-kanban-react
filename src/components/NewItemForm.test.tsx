@@ -69,5 +69,19 @@ describe('NewItemForm', () => {
 
     await user.type(characterInput, 'x')
     expect(addButton).toBeDisabled()
+    // Their text stays put, it isn't wiped.
+    expect(characterInput).toHaveValue('Rick Sanchezx')
+  })
+
+  it('puts focus back on the title after adding, ready for the next item', async () => {
+    const user = userEvent.setup()
+    const { titleInput, characterInput } = renderForm()
+
+    await user.type(titleInput, 'Get a summer job')
+    await user.click(characterInput)
+    await user.click(screen.getByRole('option', { name: 'Morty Smith' }))
+    await user.click(screen.getByRole('button', { name: 'Add item' }))
+
+    expect(titleInput).toHaveFocus()
   })
 })

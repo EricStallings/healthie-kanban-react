@@ -18,9 +18,9 @@
 }
 
 .retryButton {
-  background: var(--color-evil);
-  color: #ffffff;
-  box-shadow: 0 0 22px #9b6bff66;
+  background: var(--color-portal);
+  color: var(--color-portal-text);
+  box-shadow: 0 0 22px #97ce4c55;
   border: 0;
   border-radius: var(--radius-small);
   padding: 10px 26px;

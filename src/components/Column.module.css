@@ -1,0 +1,74 @@
+.column {
+  display: flex;
+  min-height: 60vh;
+  flex-direction: column;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--color-line);
+  border-radius: 12px;
+  background: var(--color-panel);
+  transition: border-color 0.15s ease;
+}
+
+.over {
+  border-color: #3a4757;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 2px 4px 12px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.todo {
+  background: var(--color-muted);
+}
+
+.doing {
+  background: var(--color-rick);
+}
+
+.done {
+  background: var(--color-portal);
+}
+
+.count {
+  margin-left: auto;
+  padding: 0 8px;
+  border-radius: 99px;
+  background: var(--color-panel-raised);
+  color: var(--color-muted);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* The list stretches to fill the column so the whole column is a drop target. */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  min-height: 120px;
+  margin: 0;
+  padding: 0;
+}
+
+.empty {
+  display: grid;
+  place-items: center;
+  min-height: 80px;
+  border: 1px dashed var(--color-line);
+  border-radius: var(--radius-medium);
+  color: var(--color-muted);
+  font-size: 13px;
+  list-style: none;
+}

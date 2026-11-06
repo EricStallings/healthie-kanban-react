@@ -1,0 +1,60 @@
+.toast {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 10px;
+  width: 100%;
+}
+
+.bubble {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+  padding: 10px 14px;
+  border-radius: var(--radius-large);
+  background: #ffffff;
+  color: #10161c;
+  box-shadow: 0 6px 18px #0007;
+}
+
+/* The little tail pointing at the headshot. */
+.bubble::after {
+  content: '';
+  position: absolute;
+  right: -7px;
+  bottom: 10px;
+  width: 14px;
+  height: 14px;
+  background: #ffffff;
+  border-right: inherit;
+  border-bottom: inherit;
+  transform: rotate(-45deg);
+  border-radius: 2px;
+}
+
+.headline {
+  font-size: 16px;
+}
+
+.detail {
+  font-size: 13px;
+  color: #4b5866;
+}
+
+.headshot {
+  width: 54px;
+  height: 54px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 2px solid var(--color-panel);
+  box-shadow: 0 4px 12px #0007;
+}
+
+.meeseeks .bubble {
+  border: 2px solid var(--color-rick);
+}
+
+.poopybutthole .bubble {
+  border: 2px solid var(--color-portal);
+}

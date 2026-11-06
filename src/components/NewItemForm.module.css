@@ -1,0 +1,39 @@
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.titleInput {
+  flex: 2;
+  min-width: 220px;
+  padding: 9px 12px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-small);
+  background: var(--color-panel-raised);
+  outline: none;
+}
+
+.titleInput:focus {
+  border-color: var(--color-rick);
+}
+
+.titleInput::placeholder {
+  color: var(--color-muted);
+}
+
+.addButton {
+  padding: 9px 18px;
+  border: 0;
+  border-radius: var(--radius-small);
+  background: var(--color-portal);
+  color: var(--color-portal-text);
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.addButton:disabled {
+  background: var(--color-line);
+  color: var(--color-muted);
+  cursor: not-allowed;
+}

@@ -14,6 +14,10 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  /* Long titles wrap onto more lines (taller bubble) instead of pushing the headshot
+     off screen. */
+  min-width: 0;
+  max-width: 240px;
   margin-bottom: 18px;
   padding: 10px 14px;
   border-radius: var(--radius-large);
@@ -44,6 +48,7 @@
 .detail {
   font-size: 13px;
   color: #4b5866;
+  overflow-wrap: anywhere;
 }
 
 .headshot {
@@ -89,6 +94,7 @@
 }
 
 .panel .bubble {
+  max-width: min(440px, 70vw);
   margin-bottom: 30px;
   padding: 16px 22px;
   border-width: 3px;

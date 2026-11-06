@@ -23,18 +23,7 @@
 
 .title {
   margin: 0;
-  font-family: 'Bungee', system-ui, sans-serif;
   font-size: clamp(20px, 3vw, 32px);
-  font-weight: 400;
-  line-height: 1.05;
-  letter-spacing: 0.02em;
-  color: #b6e36a;
-  /* Dark green outline drawn behind the letters, plus a glow. */
-  -webkit-text-stroke: 2px #1d4d12;
-  paint-order: stroke fill;
-  text-shadow:
-    0 0 18px #97ce4c66,
-    0 3px 0 #1d4d12;
 }
 
 .itemCount {

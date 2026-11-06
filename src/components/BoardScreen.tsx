@@ -25,7 +25,7 @@ export function BoardScreen({ characters }: BoardScreenProps) {
     <div className={styles.app}>
       <header className={styles.header}>
         <span className={styles.logo} aria-hidden="true" />
-        <h1 className={styles.title}>Interdimensional Kanban</h1>
+        <h1 className={`brand-text ${styles.title}`}>Interdimensional Kanban</h1>
         <span className={styles.itemCount}>
           {itemCount} {itemCount === 1 ? 'item' : 'items'}
         </span>

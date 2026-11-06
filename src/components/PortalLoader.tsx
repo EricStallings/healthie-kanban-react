@@ -19,7 +19,9 @@ export function PortalLoader(props: PortalLoaderProps) {
 
       {isError ? (
         <div className={styles.error} role="alert">
-          <p className={styles.errorTitle}>Couldn't reach the Rick and Morty API</p>
+          <p className={`brand-text ${styles.errorTitle}`}>
+            Couldn't reach the Rick and Morty API
+          </p>
           <p className={styles.errorDetail}>{props.message}</p>
           <button type="button" className={styles.retryButton} onClick={props.onRetry}>
             Retry

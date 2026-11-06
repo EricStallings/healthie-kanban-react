@@ -14,7 +14,37 @@
     opacity 0.6s ease;
 }
 
-/* On error, the portal stalls: a little smaller, stops spinning, and loses some color,
+/* On error: Evil Morty, ringed in purple, with a menacing glow. */
+.evilMorty {
+  width: 180px;
+  height: 180px;
+  border: 5px solid var(--color-evil);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 4px #1a0f2e,
+    0 0 36px #9b6bffaa,
+    0 0 80px #9b6bff55;
+  animation: loom-in 0.5s ease-out both;
+}
+
+@keyframes loom-in {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .evilMorty {
+    animation: none;
+  }
+}
+
+/* Fallback if his image can't load either: the portal stalls: a little smaller, stops spinning, and loses some color,
    but stays solid so it's still easy to see over the background. */
 .closed {
   transform: scale(0.8);

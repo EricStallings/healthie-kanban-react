@@ -18,8 +18,8 @@ npm run build    # type-check and production build
 ## What it does
 
 - **Loads characters** from the Rick and Morty GraphQL API with a plain `fetch` call,
-  behind a portal loader. If the API can't be reached, the portal fizzles out and a
-  Retry button appears.
+  behind a portal loader. If the API can't be reached, Evil Morty shows up
+  with a Retry button (or a stalled portal, if his image can't load either).
 - **Creates items with a form.** Each item needs a title and a character. The character
   picker is a searchable dropdown: it opens on the first 20 characters and searches the
   API by name as you type (debounced, cancelling stale requests). **Add** stays disabled

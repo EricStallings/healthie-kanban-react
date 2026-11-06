@@ -1,9 +1,9 @@
 import { useReducer } from 'react'
-import { boardReducer, initialBoard } from '../board/boardReducer'
-import type { Character } from '../types'
-import { Board } from './Board'
-import { NewItemForm } from './NewItemForm'
-import { showItemCreatedToast } from '../toasts'
+import { boardReducer, initialBoard } from '../../board/boardReducer'
+import type { Character } from '../../types'
+import { Board } from '../Board'
+import { NewItemForm } from '../NewItemForm'
+import { showItemCreatedToast } from '../../toasts'
 import styles from './BoardScreen.module.css'
 
 type BoardScreenProps = {

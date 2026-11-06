@@ -1,5 +1,5 @@
-import { Portal } from './Portal'
-import { SpeechToast } from './SpeechToast'
+import { Portal } from '../Portal'
+import { SpeechToast } from '../SpeechToast'
 import styles from './PortalLoader.module.css'
 
 // Evil Morty's avatar, from the Rick and Morty API. If it can't load (it's the same API

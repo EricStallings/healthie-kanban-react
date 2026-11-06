@@ -1,7 +1,7 @@
 import { useCombobox } from 'downshift'
 import { useState } from 'react'
-import { useCharacterSearch } from '../hooks/useCharacterSearch'
-import type { Character } from '../types'
+import { useCharacterSearch } from '../../hooks/useCharacterSearch'
+import type { Character } from '../../types'
 import styles from './CharacterPicker.module.css'
 
 type CharacterPickerProps = {

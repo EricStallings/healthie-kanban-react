@@ -1,4 +1,4 @@
-import { prefersReducedMotion } from '../motion'
+import { prefersReducedMotion } from '../../motion'
 import styles from './Portal.module.css'
 
 // A cartoon-style portal drawn from scratch in SVG: flat greens, spiral arms curling into a

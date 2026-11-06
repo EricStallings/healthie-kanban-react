@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
-import type { Character } from '../types'
+import type { Character } from '../../types'
 import { NewItemForm } from './NewItemForm'
 
 const rick: Character = { id: '1', name: 'Rick Sanchez', image: 'rick.jpeg' }

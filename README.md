@@ -51,18 +51,23 @@ src/
     useCharacters.ts          loading / error / ready for the first load, with retry
     useCharacterSearch.ts     debounced, cancellable search for the picker
     useDragSwing.ts           turns drag speed into a springy tilt
-  components/
-    BoardScreen.tsx           owns the board state (useReducer), header and form
-    Board.tsx                 dnd-kit context, drag handlers, celebration
-    Column.tsx                a droppable column with a sortable list
-    ItemCard.tsx              the sortable card, and the copy that follows the pointer
-    NewItemForm.tsx           title, character picker, Add
-    CharacterPicker.tsx       Downshift combobox
-    PortalLoader.tsx          loader and error screen
-    Portal.tsx                the portal, drawn in SVG
-    SpeechToast.tsx           headshot plus speech bubble (toasts and the error screen)
+  components/                 one folder per component: Name.tsx, Name.module.css,
+                              index.ts (and Name.test.tsx where there is one)
+    BoardScreen/              owns the board state (useReducer), header and form
+    Board/                    dnd-kit context, drag handlers, celebration
+    Column/                   a droppable column with a sortable list
+    ItemCard/                 the sortable card, and the copy that follows the pointer
+    NewItemForm/              title, character picker, Add
+    CharacterPicker/          Downshift combobox
+    PortalLoader/             loader and error screen
+    Portal/                   the portal, drawn in SVG
+    SpaceBackground/          the nebula and stars, drawn in SVG
+    SpeechToast/              headshot plus speech bubble (toasts and the error screen)
   toasts.tsx, celebrate.ts    the Meeseeks / Poopybutthole toasts and the confetti
+  setupTests.ts               test setup (jest-dom matchers, cleanup)
 ```
+
+Tests sit next to the code they test (`*.test.ts(x)`).
 
 ## Choices and why
 

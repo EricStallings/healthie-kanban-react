@@ -16,12 +16,12 @@ import {
 } from '@dnd-kit/core'
 import { sortableKeyboardCoordinates } from '@dnd-kit/sortable'
 import { useRef, useState, type Dispatch } from 'react'
-import { findColumn, isNewlyDone, type BoardAction } from '../board/boardReducer'
-import { celebrate } from '../celebrate'
-import { COLUMN_IDS, COLUMN_TITLES, type BoardState, type ColumnId } from '../types'
-import { Column } from './Column'
-import { DraggingItemCard } from './ItemCard'
-import { showItemDoneToast } from '../toasts'
+import { findColumn, isNewlyDone, type BoardAction } from '../../board/boardReducer'
+import { celebrate } from '../../celebrate'
+import { COLUMN_IDS, COLUMN_TITLES, type BoardState, type ColumnId } from '../../types'
+import { Column } from '../Column'
+import { DraggingItemCard } from '../ItemCard'
+import { showItemDoneToast } from '../../toasts'
 import styles from './Board.module.css'
 
 type BoardProps = {

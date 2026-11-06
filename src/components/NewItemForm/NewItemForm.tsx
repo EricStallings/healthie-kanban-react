@@ -1,6 +1,6 @@
 import { useRef, useState, type FormEvent } from 'react'
-import type { Character } from '../types'
-import { CharacterPicker } from './CharacterPicker'
+import type { Character } from '../../types'
+import { CharacterPicker } from '../CharacterPicker'
 import styles from './NewItemForm.module.css'
 
 type NewItemFormProps = {

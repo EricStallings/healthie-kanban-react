@@ -1,8 +1,8 @@
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import { useRef } from 'react'
-import { useDragSwing } from '../hooks/useDragSwing'
-import type { ColumnId, Item } from '../types'
+import { useDragSwing } from '../../hooks/useDragSwing'
+import type { ColumnId, Item } from '../../types'
 import styles from './ItemCard.module.css'
 
 // What a card looks like: avatar, title, character. Shared by the card in the column and

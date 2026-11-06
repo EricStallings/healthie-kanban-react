@@ -1,7 +1,7 @@
 import { useDroppable } from '@dnd-kit/core'
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
-import { COLUMN_TITLES, type ColumnId, type Item } from '../types'
-import { SortableItemCard } from './ItemCard'
+import { COLUMN_TITLES, type ColumnId, type Item } from '../../types'
+import { SortableItemCard } from '../ItemCard'
 import styles from './Column.module.css'
 
 type ColumnProps = {

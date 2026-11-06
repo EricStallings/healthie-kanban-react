@@ -13,7 +13,15 @@ export default function App() {
         <PortalLoader status="error" message={state.message} onRetry={retry} />
       )}
       {state.status === 'ready' && <BoardScreen characters={state.characters} />}
-      <Toaster position="bottom-right" duration={3500} visibleToasts={4} />
+      {/* expand lists toasts one above another. The default collapsed pile shows the older
+          ones peeking out, since our speech bubbles don't fill the whole toast. */}
+      <Toaster
+        position="bottom-right"
+        duration={3500}
+        visibleToasts={4}
+        gap={10}
+        expand
+      />
     </>
   )
 }

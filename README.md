@@ -3,6 +3,15 @@
 A frontend-only Kanban board (To Do, Doing, Done) where every item is assigned a
 character from the [Rick and Morty GraphQL API](https://rickandmortyapi.com/graphql).
 
+![Adding "Find new apartment" for Jerry Smith, then dragging it from To Do to Doing to Done](docs/screenshots/demo.gif)
+
+<details>
+<summary>The error screen, when the Rick and Morty API can't be reached</summary>
+
+![Evil Morty in a speech bubble saying the multiverse isn't answering, with a Retry button](docs/screenshots/error-screen.jpg)
+
+</details>
+
 ## Running it
 
 Needs Node 24 (see `.nvmrc`).

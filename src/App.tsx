@@ -1,6 +1,7 @@
 import { Toaster } from 'sonner'
 import { BoardScreen } from './components/BoardScreen'
 import { PortalLoader } from './components/PortalLoader'
+import { SpaceBackground } from './components/SpaceBackground'
 import { useCharacters } from './hooks/useCharacters'
 
 export default function App() {
@@ -8,6 +9,7 @@ export default function App() {
 
   return (
     <>
+      <SpaceBackground />
       {state.status === 'loading' && <PortalLoader status="loading" />}
       {state.status === 'error' && (
         <PortalLoader status="error" message={state.message} onRetry={retry} />

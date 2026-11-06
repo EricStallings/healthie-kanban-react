@@ -1,6 +1,8 @@
 :root {
   --color-background: #0f1419;
   --color-panel: #171e26;
+  /* See-through version for surfaces that sit over the space background. */
+  --color-panel-glass: #121a2a99;
   --color-panel-raised: #1e2731;
   --color-line: #2a3542;
   --color-text: #e6edf3;

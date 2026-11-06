@@ -5,7 +5,6 @@
   align-items: center;
   justify-content: center;
   gap: 28px;
-  background: radial-gradient(ellipse at center, #16202a 0%, #0b0f13 70%);
 }
 
 .portalWrap {

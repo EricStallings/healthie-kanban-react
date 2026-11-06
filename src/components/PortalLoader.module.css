@@ -8,16 +8,8 @@
   background: radial-gradient(ellipse at center, #16202a 0%, #0b0f13 70%);
 }
 
-.filterDefinitions {
-  position: absolute;
-}
-
-.portal {
-  position: relative;
-  width: 220px;
-  height: 220px;
-  filter: url(#portal-wobble) drop-shadow(0 0 18px #97ce4caa)
-    drop-shadow(0 0 44px #97ce4c55);
+.portalWrap {
+  filter: drop-shadow(0 0 22px #97ce4c55);
   transition:
     transform 0.6s ease,
     opacity 0.6s ease;
@@ -27,52 +19,6 @@
 .closed {
   transform: scale(0.35);
   opacity: 0.35;
-}
-
-.outerSwirl,
-.innerSwirl,
-.core {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-}
-
-.outerSwirl {
-  background: repeating-conic-gradient(
-    from 0deg,
-    #3d8b1f 0deg 14deg,
-    #97ce4c 14deg 26deg,
-    #c6ef6e 26deg 32deg,
-    #5fae2e 32deg 45deg
-  );
-  mask: radial-gradient(circle, #000 58%, transparent 71%);
-  animation: spin 2.6s linear infinite;
-}
-
-.innerSwirl {
-  inset: 14%;
-  background: repeating-conic-gradient(
-    from 20deg,
-    #b8ea5d 0deg 10deg,
-    #72bd36 10deg 22deg,
-    #e4f7a8 22deg 27deg,
-    #8fd145 27deg 36deg
-  );
-  mask: radial-gradient(circle, #000 55%, transparent 72%);
-  opacity: 0.9;
-  animation: spin 1.7s linear infinite reverse;
-}
-
-.core {
-  inset: 30%;
-  background: radial-gradient(
-    circle,
-    #ffffff 0%,
-    var(--color-portal-light) 35%,
-    #b5e655 70%,
-    transparent 100%
-  );
-  animation: pulse 1.4s ease-in-out infinite;
 }
 
 .message {
@@ -104,28 +50,4 @@
   padding: 9px 20px;
   font-weight: 650;
   cursor: pointer;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes pulse {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.06);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .outerSwirl,
-  .innerSwirl,
-  .core {
-    animation-duration: 12s;
-  }
 }

@@ -1,40 +1,20 @@
+import { Portal } from './Portal'
 import styles from './PortalLoader.module.css'
 
 type PortalLoaderProps =
   { status: 'loading' } | { status: 'error'; message: string; onRetry: () => void }
 
-// The full-screen loader shown while the first characters load. The portal is drawn
-// entirely with CSS gradients plus an SVG filter that makes its edge wobble, so there are
-// no images from the show in the repo.
+// The full-screen loader shown while the first characters load. If the API can't be
+// reached, the portal shrinks and fades and a Retry button appears.
 export function PortalLoader(props: PortalLoaderProps) {
   const isError = props.status === 'error'
 
   return (
     <main className={styles.stage}>
-      <svg width="0" height="0" className={styles.filterDefinitions} aria-hidden="true">
-        <filter id="portal-wobble">
-          <feTurbulence
-            type="fractalNoise"
-            baseFrequency="0.035"
-            numOctaves="2"
-            seed="3"
-            result="noise"
-          >
-            <animate
-              attributeName="baseFrequency"
-              dur="3s"
-              values="0.03;0.045;0.03"
-              repeatCount="indefinite"
-            />
-          </feTurbulence>
-          <feDisplacementMap in="SourceGraphic" in2="noise" scale="14" />
-        </filter>
-      </svg>
-
-      <div className={isError ? `${styles.portal} ${styles.closed}` : styles.portal}>
-        <div className={styles.outerSwirl} />
-        <div className={styles.innerSwirl} />
-        <div className={styles.core} />
+      <div
+        className={isError ? `${styles.portalWrap} ${styles.closed}` : styles.portalWrap}
+      >
+        <Portal />
       </div>
 
       {isError ? (

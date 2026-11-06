@@ -1,0 +1,28 @@
+.portal {
+  display: block;
+  width: 230px;
+  height: 230px;
+  overflow: visible;
+}
+
+/* steps() makes the spin choppy on purpose, like hand-drawn animation at ~12 frames a second. */
+.arms {
+  animation: spin 1.6s steps(20) infinite;
+}
+
+.foam {
+  animation: spin 6s steps(48) infinite reverse;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arms,
+  .foam {
+    animation-duration: 20s;
+  }
+}

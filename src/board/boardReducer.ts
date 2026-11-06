@@ -73,8 +73,7 @@ export function boardReducer(board: BoardState, action: BoardAction): BoardState
 }
 
 // Sample cards so the board isn't empty on first load. They're built from whatever the
-// API returned, so nothing is hardcoded. If persistence is added later, this is where it
-// plugs in: load saved state if there is any, otherwise seed.
+// API returned, so nothing is hardcoded.
 const SAMPLES: { title: string; column: ColumnId }[] = [
   { title: 'Fix the portal gun', column: 'todo' },
   { title: 'Finish math homework', column: 'doing' },

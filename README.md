@@ -95,13 +95,6 @@ src/
   Font License) is bundled through `@fontsource`, so nothing loads from a font service.
 - **Motion respects `prefers-reduced-motion`:** no swing, no confetti, and a slower portal.
 
-## Intentionally left for the pairing session
-
-- **Persistence.** Board state is in memory and resets on reload. The state is plain JSON,
-  so saving it is mostly "write it after every action, read it on startup."
-  `initialBoard` is where loading saved state would plug in.
-- **Filtering** board items, for example by character or title.
-
 ## Tradeoffs and what I'd revisit
 
 - **API resilience.** No caching yet, so every search hits the API. In production I'd

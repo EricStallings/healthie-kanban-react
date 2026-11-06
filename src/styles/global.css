@@ -61,3 +61,10 @@ input {
   white-space: nowrap;
   border: 0;
 }
+
+/* Sonner slides new toasts up from the bottom. Turn that off so our toast content can
+   pop in from nothing instead (see SpeechToast.module.css). Stacking and dismissing
+   still use sonner's own animations. */
+[data-sonner-toast][data-y-position='bottom'][data-mounted='false'] {
+  --y: translateY(0);
+}

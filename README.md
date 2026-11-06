@@ -82,6 +82,8 @@ src/
   is drawn from scratch in SVG and CSS.
 - **sonner** handles toast stacking and timing. **canvas-confetti** handles the confetti.
 - **CSS Modules** per component, with the palette in CSS variables in `styles/global.css`.
+  The space background and portal are drawn in SVG/CSS. The title font (Bungee, SIL Open
+  Font License) is bundled through `@fontsource`, so nothing loads from a font service.
 - **Motion respects `prefers-reduced-motion`:** no swing, no confetti, and a slower portal.
 
 ## Intentionally left for the pairing session

@@ -21,11 +21,15 @@ export function Column({ columnId, items, onRemove }: ColumnProps) {
       className={`${styles.column} ${isOver ? styles.over : ''}`}
       aria-labelledby={headingId}
     >
-      <h2 className={styles.header} id={headingId}>
+      {/* tabIndex -1 lets focus land here after the last card is removed. */}
+      <h2 className={styles.header} id={headingId} tabIndex={-1}>
         <span className={`${styles.dot} ${styles[columnId]}`} aria-hidden="true" />
         {COLUMN_TITLES[columnId]}
-        <span className={styles.count} aria-label={`${items.length} items`}>
+        <span className={styles.count} aria-hidden="true">
           {items.length}
+        </span>
+        <span className="visually-hidden">
+          , {items.length} {items.length === 1 ? 'item' : 'items'}
         </span>
       </h2>
 

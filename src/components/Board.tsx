@@ -98,7 +98,9 @@ export function Board({ board, dispatch }: BoardProps) {
     dragStart.current = null
 
     if (!over) {
-      // Dropped outside every column: put it back.
+      // Safety net: closestCorners always picks the nearest column, so in practice there
+      // is always a target, and a card dropped off the board lands in the closest column.
+      // If there somehow isn't one, put the card back where it started.
       if (start) {
         dispatch({
           type: 'MOVE_ITEM',
@@ -136,6 +138,27 @@ export function Board({ board, dispatch }: BoardProps) {
     }
   }
 
+  // Removing a card would leave keyboard focus nowhere, so move it to the next card in
+  // the column (or the previous one, or the column heading if it was the last card).
+  function handleRemove(itemId: string) {
+    const column = findColumn(board, itemId)
+    if (!column) return
+    const columnIds = board.columns[column]
+    const index = columnIds.indexOf(itemId)
+    const neighborId = columnIds[index + 1] ?? columnIds[index - 1]
+
+    dispatch({ type: 'REMOVE_ITEM', itemId })
+
+    requestAnimationFrame(() => {
+      const nextFocus = neighborId
+        ? document.querySelector<HTMLElement>(
+            `[data-item-id="${CSS.escape(neighborId)}"]`,
+          )
+        : document.getElementById(`column-${column}-heading`)
+      nextFocus?.focus()
+    })
+  }
+
   function handleDragCancel() {
     const start = dragStart.current
     if (activeItemId && start) {
@@ -164,7 +187,7 @@ export function Board({ board, dispatch }: BoardProps) {
       const column = over ? columnOf(String(over.id)) : undefined
       return column
         ? `Dropped ${titleOf(active.id)} in ${COLUMN_TITLES[column]}.`
-        : `Dropped ${titleOf(active.id)}. It went back where it was.`
+        : `Dropped ${titleOf(active.id)}.`
     },
     onDragCancel: ({ active }) =>
       `Cancelled. ${titleOf(active.id)} went back where it was.`,
@@ -188,7 +211,7 @@ export function Board({ board, dispatch }: BoardProps) {
             key={columnId}
             columnId={columnId}
             items={board.columns[columnId].map((itemId) => board.items[itemId])}
-            onRemove={(itemId) => dispatch({ type: 'REMOVE_ITEM', itemId })}
+            onRemove={handleRemove}
           />
         ))}
       </div>

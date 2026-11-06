@@ -1,16 +1,24 @@
 .card {
   position: relative;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 34px 10px 10px;
   border: 1px solid var(--color-line);
   border-radius: var(--radius-medium);
   background: var(--color-panel-raised);
   list-style: none;
+}
+
+/* The whole card body is the drag handle. The remove button sits on top of it. */
+.handle {
+  padding: 10px 34px 10px 10px;
+  border-radius: inherit;
   cursor: grab;
   touch-action: none;
   user-select: none;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .card:hover {
@@ -76,7 +84,7 @@
 }
 
 .card:hover .removeButton,
-.removeButton:focus-visible {
+.card:focus-within .removeButton {
   opacity: 1;
 }
 

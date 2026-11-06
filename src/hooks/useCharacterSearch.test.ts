@@ -74,4 +74,24 @@ describe('useCharacterSearch', () => {
 
     expect(result.current).toEqual({ results: [], isSearching: false, hasError: true })
   })
+
+  it('does not show an old error when the same query is typed again', async () => {
+    const fetchSpy = vi
+      .spyOn(api, 'fetchCharacters')
+      .mockRejectedValueOnce(new Error('Network down'))
+      .mockImplementationOnce(() => new Promise(() => {})) // second try is still in flight
+    const { result, rerender } = renderHook(
+      ({ query }) => useCharacterSearch(query, defaults),
+      { initialProps: { query: 'ab' } },
+    )
+    await act(() => vi.advanceTimersByTimeAsync(300))
+    expect(result.current.hasError).toBe(true)
+
+    rerender({ query: '' })
+    rerender({ query: 'ab' })
+
+    expect(result.current).toEqual({ results: [], isSearching: true, hasError: false })
+    await act(() => vi.advanceTimersByTimeAsync(300))
+    expect(fetchSpy).toHaveBeenCalledTimes(2)
+  })
 })

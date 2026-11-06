@@ -5,16 +5,11 @@ import { useDragSwing } from '../hooks/useDragSwing'
 import type { ColumnId, Item } from '../types'
 import styles from './ItemCard.module.css'
 
-type CardContentProps = {
-  item: Item
-  onRemove?: (itemId: string) => void
-}
-
-// What a card looks like. Shared by the card in the column and the copy that follows
-// the pointer while dragging.
-function CardContent({ item, onRemove }: CardContentProps) {
+// What a card looks like: avatar, title, character. Shared by the card in the column and
+// the copy that follows the pointer while dragging.
+function CardContent({ item }: { item: Item }) {
   return (
-    <>
+    <div className={styles.content}>
       <img
         className={styles.avatar}
         src={item.character.image}
@@ -26,20 +21,7 @@ function CardContent({ item, onRemove }: CardContentProps) {
         <span className={styles.title}>{item.title}</span>
         <span className={styles.characterName}>{item.character.name}</span>
       </div>
-      {onRemove && (
-        <button
-          type="button"
-          className={styles.removeButton}
-          aria-label={`Remove "${item.title}"`}
-          // Keep a click on the button from starting a drag.
-          onPointerDown={(event) => event.stopPropagation()}
-          onKeyDown={(event) => event.stopPropagation()}
-          onClick={() => onRemove(item.id)}
-        >
-          ×
-        </button>
-      )}
-    </>
+    </div>
   )
 }
 
@@ -50,9 +32,18 @@ type SortableItemCardProps = {
 }
 
 // A card in a column. useSortable makes it draggable and lets other cards make room.
+// The drag handle and the remove button are siblings, not nested, so each is its own
+// control for keyboard and screen reader users.
 export function SortableItemCard({ item, columnId, onRemove }: SortableItemCardProps) {
-  const { attributes, listeners, setNodeRef, transform, transition, isDragging } =
-    useSortable({ id: item.id })
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    setActivatorNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id: item.id })
 
   const classNames = [styles.card]
   if (columnId === 'done') classNames.push(styles.done)
@@ -64,10 +55,25 @@ export function SortableItemCard({ item, columnId, onRemove }: SortableItemCardP
       ref={setNodeRef}
       className={classNames.join(' ')}
       style={{ transform: CSS.Transform.toString(transform), transition }}
-      {...attributes}
-      {...listeners}
     >
-      <CardContent item={item} onRemove={onRemove} />
+      <div
+        ref={setActivatorNodeRef}
+        className={styles.handle}
+        // Lets the board move focus to this card after a neighbor is removed.
+        data-item-id={item.id}
+        {...attributes}
+        {...listeners}
+      >
+        <CardContent item={item} />
+      </div>
+      <button
+        type="button"
+        className={styles.removeButton}
+        aria-label={`Remove "${item.title}"`}
+        onClick={() => onRemove(item.id)}
+      >
+        ×
+      </button>
     </li>
   )
 }
@@ -83,7 +89,9 @@ export function DraggingItemCard({ item }: { item: Item }) {
   return (
     <div>
       <div ref={cardRef} className={`${styles.card} ${styles.dragging}`}>
-        <CardContent item={item} />
+        <div className={styles.handle}>
+          <CardContent item={item} />
+        </div>
       </div>
     </div>
   )

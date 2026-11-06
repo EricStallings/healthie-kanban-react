@@ -1,3 +1,4 @@
+import { prefersReducedMotion } from '../motion'
 import styles from './Portal.module.css'
 
 // A cartoon-style portal drawn from scratch in SVG: flat greens, spiral arms curling into a
@@ -45,6 +46,9 @@ const FOAM = Array.from({ length: 70 }, (_, index) => {
 })
 
 export function Portal({ className = '' }: { className?: string }) {
+  // The flickering edge is an SVG animation, which CSS media queries can't slow down.
+  const animateEdge = !prefersReducedMotion()
+
   return (
     <svg
       className={`${styles.portal} ${className}`}
@@ -56,13 +60,15 @@ export function Portal({ className = '' }: { className?: string }) {
         {/* Roughens every edge so it looks hand-drawn instead of perfectly smooth. */}
         <filter id="portal-rough" x="-20%" y="-20%" width="140%" height="140%">
           <feTurbulence type="fractalNoise" baseFrequency="0.07" numOctaves="3" seed="7">
-            <animate
-              attributeName="seed"
-              values="7;19;31;43"
-              dur="0.48s"
-              calcMode="discrete"
-              repeatCount="indefinite"
-            />
+            {animateEdge && (
+              <animate
+                attributeName="seed"
+                values="7;19;31;43"
+                dur="0.48s"
+                calcMode="discrete"
+                repeatCount="indefinite"
+              />
+            )}
           </feTurbulence>
           <feDisplacementMap in="SourceGraphic" scale="12" />
         </filter>

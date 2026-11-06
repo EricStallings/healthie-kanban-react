@@ -4,14 +4,16 @@ import type { Character } from '../types'
 
 export const SEARCH_DEBOUNCE_MS = 250
 
+type SearchResponse = { query: string; results: Character[]; hasError: boolean }
+
 // Searches the API by name as the user types. It waits for a short pause before sending,
 // and cancels the previous request so an old, slow response can't overwrite a newer one.
 // With no query it returns the characters the app already loaded.
+
 export function useCharacterSearch(query: string, defaultCharacters: Character[]) {
   const trimmedQuery = query.trim()
-  const [searchResults, setSearchResults] = useState<Character[]>([])
-  const [searchedQuery, setSearchedQuery] = useState('')
-  const [hasError, setHasError] = useState(false)
+  // The latest answer from the API, tagged with the query it answers.
+  const [response, setResponse] = useState<SearchResponse | null>(null)
 
   useEffect(() => {
     if (!trimmedQuery) return
@@ -19,22 +21,19 @@ export function useCharacterSearch(query: string, defaultCharacters: Character[]
     const controller = new AbortController()
     const timer = setTimeout(() => {
       fetchCharacters(trimmedQuery, controller.signal)
-        .then((characters) => {
-          setSearchResults(characters)
-          setHasError(false)
-          setSearchedQuery(trimmedQuery)
-        })
+        .then((results) => setResponse({ query: trimmedQuery, results, hasError: false }))
         .catch(() => {
           if (controller.signal.aborted) return
-          setSearchResults([])
-          setHasError(true)
-          setSearchedQuery(trimmedQuery)
+          setResponse({ query: trimmedQuery, results: [], hasError: true })
         })
     }, SEARCH_DEBOUNCE_MS)
 
     return () => {
       clearTimeout(timer)
       controller.abort()
+      // Forget the old answer, so retyping an earlier query (one that failed, say)
+      // shows "searching" instead of its stale result.
+      setResponse(null)
     }
   }, [trimmedQuery])
 
@@ -42,11 +41,9 @@ export function useCharacterSearch(query: string, defaultCharacters: Character[]
     return { results: defaultCharacters, isSearching: false, hasError: false }
   }
 
-  // Until the response for the current text arrives, we're still searching.
-  const isSearching = searchedQuery !== trimmedQuery
-  return {
-    results: isSearching ? [] : searchResults,
-    isSearching,
-    hasError: !isSearching && hasError,
+  // Until the answer for the current text arrives, we're still searching.
+  if (response?.query !== trimmedQuery) {
+    return { results: [], isSearching: true, hasError: false }
   }
+  return { results: response.results, isSearching: false, hasError: response.hasError }
 }

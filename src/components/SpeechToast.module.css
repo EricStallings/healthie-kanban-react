@@ -73,6 +73,42 @@
   border-color: var(--color-portal);
 }
 
+.evilMorty .bubble {
+  border: 2px solid var(--color-evil);
+}
+
+.evilMorty .headshot {
+  border-color: var(--color-evil);
+}
+
+/* The error screen's version: bigger, centered, and still. */
+.panel {
+  width: auto;
+  justify-content: center;
+  animation: none;
+}
+
+.panel .bubble {
+  margin-bottom: 30px;
+  padding: 16px 22px;
+  border-width: 3px;
+}
+
+.panel .headline {
+  font-size: 22px;
+}
+
+.panel .detail {
+  font-size: 15px;
+}
+
+.panel .headshot {
+  width: 110px;
+  height: 110px;
+  border-width: 4px;
+  box-shadow: 0 0 30px #9b6bff66;
+}
+
 @keyframes slam-in {
   0% {
     transform: scale(1.8);

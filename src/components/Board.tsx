@@ -194,6 +194,7 @@ export function Board({ board, dispatch }: BoardProps) {
   }
 
   const activeItem = activeItemId ? board.items[activeItemId] : null
+  const activeColumn = activeItemId ? findColumn(board, activeItemId) : undefined
 
   return (
     <DndContext
@@ -216,7 +217,11 @@ export function Board({ board, dispatch }: BoardProps) {
         ))}
       </div>
 
-      <DragOverlay>{activeItem && <DraggingItemCard item={activeItem} />}</DragOverlay>
+      <DragOverlay>
+        {activeItem && activeColumn && (
+          <DraggingItemCard item={activeItem} columnId={activeColumn} />
+        )}
+      </DragOverlay>
     </DndContext>
   )
 }

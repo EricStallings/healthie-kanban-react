@@ -45,8 +45,8 @@ export function SortableItemCard({ item, columnId, onRemove }: SortableItemCardP
     isDragging,
   } = useSortable({ id: item.id })
 
-  const classNames = [styles.card]
-  if (columnId === 'done') classNames.push(styles.done)
+  // The column class colors the avatar ring (and Done's left edge).
+  const classNames = [styles.card, styles[columnId]]
   // While dragging, the original stays in place as a faded placeholder.
   if (isDragging) classNames.push(styles.placeholder)
 
@@ -82,13 +82,16 @@ export function SortableItemCard({ item, columnId, onRemove }: SortableItemCardP
 // one that swings. dnd-kit measures the outer div to decide where the card is, so the
 // tilt and lift go on the inner div. Otherwise the tilted box looks wider than it is,
 // and keyboard moves pick the wrong column.
-export function DraggingItemCard({ item }: { item: Item }) {
+export function DraggingItemCard({ item, columnId }: { item: Item; columnId: ColumnId }) {
   const cardRef = useRef<HTMLDivElement>(null)
   useDragSwing(cardRef)
 
   return (
     <div>
-      <div ref={cardRef} className={`${styles.card} ${styles.dragging}`}>
+      <div
+        ref={cardRef}
+        className={`${styles.card} ${styles[columnId]} ${styles.dragging}`}
+      >
         <div className={styles.handle}>
           <CardContent item={item} />
         </div>

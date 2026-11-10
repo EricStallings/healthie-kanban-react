@@ -17,6 +17,7 @@ export function BoardScreen({ characters }: BoardScreenProps) {
   const itemCount = Object.keys(board.items).length
 
   function handleAdd(title: string, character: Character) {
+    // crypto.randomUUID() is built into the browser, no uuid library needed.
     dispatch({ type: 'ADD_ITEM', item: { id: crypto.randomUUID(), title, character } })
     showItemCreatedToast(title)
   }

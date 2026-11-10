@@ -15,6 +15,7 @@ export function useCharacterSearch(query: string, defaultCharacters: Character[]
   // The latest answer from the API, tagged with the query it answers.
   const [response, setResponse] = useState<SearchResponse | null>(null)
 
+  // Debounce: wait SEARCH_DEBOUNCE_MS after typing stops, then search.
   useEffect(() => {
     if (!trimmedQuery) return
 
@@ -28,6 +29,7 @@ export function useCharacterSearch(query: string, defaultCharacters: Character[]
         })
     }, SEARCH_DEBOUNCE_MS)
 
+    // Cleanup runs before the next search: cancel the timer and the request.
     return () => {
       clearTimeout(timer)
       controller.abort()

@@ -17,6 +17,7 @@ function wait(milliseconds: number) {
 // Loads the first page of characters when the app starts.
 export function useCharacters() {
   const [state, setState] = useState<CharactersState>({ status: 'loading' })
+  // Bumping attempt re-runs the effect below, which is how Retry refetches.
   const [attempt, setAttempt] = useState(0)
 
   useEffect(() => {

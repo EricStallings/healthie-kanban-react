@@ -36,7 +36,8 @@ function isColumnId(id: string): id is ColumnId {
 export function Board({ board, dispatch }: BoardProps) {
   const [activeItemId, setActiveItemId] = useState<string | null>(null)
   // Where the card was when the drag started, so we can tell if it newly reached Done,
-  // and put it back if the drag is cancelled.
+  // and put it back if the drag is cancelled. useRef, not useState: we read it in
+  // handlers but never render it.
   const dragStart = useRef<{ column: ColumnId; index: number } | null>(null)
 
   const sensors = useSensors(
@@ -217,6 +218,7 @@ export function Board({ board, dispatch }: BoardProps) {
         ))}
       </div>
 
+      {/* A floating copy that follows the pointer, so the list can reflow underneath. */}
       <DragOverlay>
         {activeItem && activeColumn && (
           <DraggingItemCard item={activeItem} columnId={activeColumn} />
